@@ -28,7 +28,12 @@ function updateQuiz() {
         })
         console.log($(this).find("a"));
         $(this).find("a").css({
-            "font-size" : "20px"
+            "font-size" : "40px"
+        });
+
+        $(this).find("a").on("click", function() {
+            clearInterval(quizTimer);
+            $("#timer").text("A choice is chosen!");
         })
     });
 
