@@ -2,6 +2,10 @@ let triviaQuiz = [{
     question: 'who is your daddy?',
     choice: ['you are', 'he is', 'no one is'],
     answer: 1
+}, {
+    question: "who is your mummy?",
+    choice: ["you are", "she is", "no one is"],
+    answer: 0
 }];
 
 let currQuizIdx = 0;
@@ -17,7 +21,7 @@ function updateQuiz() {
 
     currChoice = "";
     for(i = 0; i < triviaQuiz[currQuizIdx].choice.length; i++) {
-        currChoice += "<div container='row'><a class='btn btn-primary btn-lg id='" + i + "'>" + triviaQuiz[currQuizIdx].choice[i] + "</a></div>"
+        currChoice += '<div container="row"><a class="btn btn-primary btn-lg" id="' + i + '">' + triviaQuiz[currQuizIdx].choice[i] + "</a></div>"
     }
 
     // show choices
@@ -33,7 +37,10 @@ function updateQuiz() {
 
         $(this).find("a").on("click", function() {
             clearInterval(quizTimer);
-            $("#timer").text("A choice is chosen!");
+
+            let answerId = $(this).attr("id");
+            $("#timer").text("A choice is chosen! " + answerId);
+
         })
     });
 
