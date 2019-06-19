@@ -1,0 +1,27 @@
+/* body style */
+body {
+    background-image: url("../images/background.png");
+    background-repeat: repeat;
+    background-attachment: fixed;
+    background-position: center;
+}
+
+.triviaZone {
+    margin-top : 40px;
+    width: 960px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: yellow;
+    opacity: 0.9;
+}
+
+.center {
+    text-align: center;
+}
+
+.startButton {
+    margin-top: 100px;
+    margin-bottom: 100px;
+    width: 300px;
+    font-size: 40px;
+}
