@@ -6,6 +6,7 @@ body {
     background-position: center;
 }
 
+/* trivia zone css jumbotron */
 .triviaZone {
     margin-top : 40px;
     width: 960px;
@@ -15,13 +16,19 @@ body {
     opacity: 0.9;
 }
 
+/* align text center */
 .center {
     text-align: center;
 }
 
+/* start button */
 .startButton {
     margin-top: 100px;
     margin-bottom: 100px;
     width: 300px;
     font-size: 40px;
+}
+
+.questionText {
+    font-size: 30px;
 }
