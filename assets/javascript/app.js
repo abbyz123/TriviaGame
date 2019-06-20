@@ -1,19 +1,45 @@
 let triviaQuiz = [{
-    question: 'who is your daddy?',
-    choice: ['you are', 'he is', 'no one is'],
-    answer: 1
+    question: 'Only in Houston does "Rice" refers to ____',
+    choice: ['A person', 'A grain', 'A university'],
+    answer: 2,
+    correctCaption: "That's right! Rice University!",
+    wrongCaption: "Em...Not a local college kid for sure"
 }, {
-    question: "who is your mummy?",
-    choice: ["you are", "she is", "no one is"],
-    answer: 0
+    question: "Whether it’s Cajun, Tex-Mex, Greek, BBQ, steak, seafood, or burgers, the _____ family restaurants have you covered.",
+    choice: ["Pappas", "Mammas", "Brothers"],
+    answer: 0,
+    correctCaption: "Pappas! Yummy!",
+    wrongCaption: "Mammas and Brothers? Seriously?"
 }, {
-    question: "who is your granpa?",
-    choice: ["you are", "he is", "no one is"],
-    answer: 2
+    question: "Houston locals plan road trips just so they can work in a _____ stop.",
+    choice: ["Von's", "Wendy's", "Buc-ee's"],
+    answer: 1,
+    correctCaption: "Wendy's everywhere!",
+    wrongCaption: "Em...defnitely a McDonald's person, this one"
 }, {
-    question: "who is your granma?",
-    choice: ["you are", "she is", "no one is"],
-    answer: 1
+    question: 'When someone mentions they’re going to “the beach," you know they’re talking about _____.',
+    choice: ["Galveston", "Hunters Creek", "Buffalo Bayou"],
+    answer: 0,
+    correctCaption: "Galveston beach! Where people fish crabs!!",
+    wrongCaption: "Dude...you never drive 1 hour down south along I45? Geez...."
+}, {
+    question: "We bet you can't drive past the intersection of 610 and Kirby and NOT think about _____.",
+    choice: ["Buffalo Bayou Park", "Astroworld", "Toyota Stadium"],
+    answer: 0,
+    correctCaption: "You are definitely an uptown folk!",
+    wrongCaption: "Houston is not just about Astro and Rockets! Think Again!"
+}, {
+    question: "Only in Houston do they call service roads _____.",
+    choice: ["Frontage Roads", "Feeder Roads", "First Roads"],
+    answer: 0,
+    correctCaption: "Your way or High way!",
+    wrongCaption: "Really? Can you even drive?"
+}, {
+    question: "For vintage clothing and retro decor, _____ in The Heights is the place to go.",
+    choice: ["Rodeo Drive", "5th Ave", "19th Street"],
+    answer: 2,
+    correctCaption: "Old style is Texas style!",
+    wrongCaption: "This is Houston ok? Not NYC..."
 }];
 
 let currQuizIdx = 0;
@@ -79,12 +105,12 @@ function updateQuiz() {
             if (triviaQuiz[currQuizIdx].answer === answerId) {
                 // correct answer
                 console.log("correct answer");
-                $("#answerZone").text("Correct Answer!");
+                $("#answerZone").text(triviaQuiz[currQuizIdx].correctCaption);
                 correctAnswer += 1;
             } else {
                 // Wrong answer
                 console.log("wrong answer");
-                $("#answerZone").text("Wrong Answer!");
+                $("#answerZone").text(triviaQuiz[currQuizIdx].wrongCaption);
             }
 
             // next quiz
