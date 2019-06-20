@@ -28,7 +28,7 @@ let correctAnswer = 0;
 function updateQuizTimer() {
     $("#timer").text("Time left: " + Math.ceil(thinkTimeMS / 1000) + " seconds");
     let countDownTime = new Date().getTime() + thinkTimeMS;
-    quizTimer = setInterval(function() {
+    quizTimer = setInterval(function () {
         let now = new Date().getTime();
         let distance = countDownTime - now;
 
@@ -53,7 +53,7 @@ function updateQuiz() {
     $("#questionZone").html("<p id='currQuestion'>" + triviaQuiz[currQuizIdx].question + "</p>");
 
     currChoice = "";
-    for(i = 0; i < triviaQuiz[currQuizIdx].choice.length; i++) {
+    for (i = 0; i < triviaQuiz[currQuizIdx].choice.length; i++) {
         currChoice += '<div container="row"><a class="btn btn-primary btn-lg" id="' + i + '">' + triviaQuiz[currQuizIdx].choice[i] + "</a></div>"
     }
 
@@ -61,14 +61,14 @@ function updateQuiz() {
     $("#selectZone").html(currChoice);
     $("#selectZone>*").each(function () {
         $(this).css({
-            "margin-top" : "20px"
+            "margin-top": "20px"
         })
         console.log($(this).find("a"));
         $(this).find("a").css({
-            "font-size" : "40px"
+            "font-size": "40px"
         });
 
-        $(this).find("a").on("click", function() {
+        $(this).find("a").on("click", function () {
             clearInterval(quizTimer);
 
             let answerId = $(this).attr("id");
@@ -88,28 +88,35 @@ function updateQuiz() {
             }
 
             // next quiz
-            nextQuiz();           
+            nextQuiz();
         })
     });
 }
 
 function nextQuiz() {
     currQuizIdx += 1;       // next quiz
-    if (currQuizIdx >= triviaQuiz.length) {
-        // end of quiz, show score
-    } else {
-        // down five seconds and move on to next quiz
-        let chillDownTime = new Date().getTime() + answerTimeMS;
-        answerTimer = setInterval(function() {
-            let now = new Date().getTime();
-            let distance = chillDownTime - now;
-            if (distance < 0) {
-                clearInterval(answerTimer);
+
+    // wait for five second and update quiz
+    let chillDownTime = new Date().getTime() + answerTimeMS;
+    answerTimer = setInterval(function () {
+        let now = new Date().getTime();
+        let distance = chillDownTime - now;
+        if (distance < 0) {
+            clearInterval(answerTimer);
+            if (currQuizIdx >= triviaQuiz.length) {
+                // end of quiz, show score
+                $("#timer").text("You are done!");
+                $("#questionZone").text("Your Score: ");
+                $("#selectZone").html('<div container="row">Correct Answer: ' + correctAnswer + '</div>');
+                $("#selectZone").append('<div container="row">Wrong Answer: ' + (triviaQuiz.length - correctAnswer) + '</div>')
+                $("#selectZone").addClass("score");
+                $("#answerZone").hide();
+            } else {
                 updateQuiz();
                 updateQuizTimer();
             }
-        }, 1000);
-    }
+        }
+    }, 1000);
 }
 
 $(function () {
@@ -119,11 +126,11 @@ $(function () {
     $("#start").addClass("startButton");
     $("#questionZone").addClass("questionText");
     $("#timer").css({
-        "font-size" : "25px"
+        "font-size": "25px"
     })
     $("#answerZone").css({
-        "font-size" : "20px",
-        "margin-top" : "20px"
+        "font-size": "20px",
+        "margin-top": "20px"
     })
 
     // TODO: shuffle the sequence of the quiz questions

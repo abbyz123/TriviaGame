@@ -29,6 +29,12 @@ body {
     font-size: 40px;
 }
 
+/* question text */
 .questionText {
     font-size: 30px;
+}
+
+/* score */
+.score {
+    font-size: 40px;
 }
