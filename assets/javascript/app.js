@@ -161,8 +161,6 @@ $(function () {
         "margin-top": "20px"
     })
 
-    // TODO: shuffle the sequence of the quiz questions
-
     // on click the start button, quiz starts!
     $("#start").on("click", function (e) {
         console.log('start');
