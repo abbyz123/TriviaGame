@@ -3,43 +3,50 @@ let triviaQuiz = [{
     choice: ['A person', 'A grain', 'A university'],
     answer: 2,
     correctCaption: "That's right! Rice University!",
-    wrongCaption: "Em...Not a local college kid for sure"
+    wrongCaption: "Em...Not a local college kid for sure",
+    timeoutCaption: "It's a university...You know, where people go and hang out?"
 }, {
     question: "Whether it’s Cajun, Tex-Mex, Greek, BBQ, steak, seafood, or burgers, the _____ family restaurants have you covered.",
     choice: ["Pappas", "Mammas", "Brothers"],
     answer: 0,
     correctCaption: "Pappas! Yummy!",
-    wrongCaption: "Mammas and Brothers? Seriously?"
+    wrongCaption: "Mammas and Brothers? Seriously?",
+    timeoutCaption: "Oh, Pappas! Please save this poor kid..."
 }, {
     question: "Houston locals plan road trips just so they can work in a _____ stop.",
     choice: ["Von's", "Wendy's", "Buc-ee's"],
     answer: 1,
     correctCaption: "Wendy's everywhere!",
-    wrongCaption: "Em...defnitely a McDonald's person, this one"
+    wrongCaption: "Em...defnitely a McDonald's person, this one",
+    timeoutCaption: "Wendy says howdy..."
 }, {
     question: 'When someone mentions they’re going to “the beach," you know they’re talking about _____.',
     choice: ["Galveston", "Hunters Creek", "Buffalo Bayou"],
     answer: 0,
     correctCaption: "Galveston beach! Where people fish crabs!!",
-    wrongCaption: "Dude...you never drive 1 hour down south along I45? Geez...."
+    wrongCaption: "Dude...you never drive 1 hour down south along I45? Geez....",
+    timeoutCaption: "When you caught in traffic in I45 south, don't worry, the traffic is all the way to Galveston..."
 }, {
     question: "We bet you can't drive past the intersection of 610 and Kirby and NOT think about _____.",
     choice: ["Buffalo Bayou Park", "Astroworld", "Toyota Stadium"],
     answer: 0,
     correctCaption: "You are definitely an uptown folk!",
-    wrongCaption: "Houston is not just about Astro and Rockets! Think Again!"
+    wrongCaption: "Houston is not just about Astro and Rockets! Think Again!",
+    timeoutCaption: "Let me give a hint...Buffalo Speedway...Rings a bell?"
 }, {
     question: "Only in Houston do they call service roads _____.",
     choice: ["Frontage Roads", "Feeder Roads", "First Roads"],
     answer: 0,
     correctCaption: "Your way or High way!",
-    wrongCaption: "Really? Can you even drive?"
+    wrongCaption: "Really? Can you even drive?",
+    timeoutCaption: "You know, the road up in the front is called frontage road..."
 }, {
     question: "For vintage clothing and retro decor, _____ in The Heights is the place to go.",
     choice: ["Rodeo Drive", "5th Ave", "19th Street"],
     answer: 2,
     correctCaption: "Old style is Texas style!",
-    wrongCaption: "This is Houston ok? Not NYC..."
+    wrongCaption: "I bet you chose 5th Ave. Fancy old stuff is alway in New York, eh? Meh...",
+    timeoutCaption: "Look, Ma, 80's cowboy jacket on 19th street..."
 }];
 
 let currQuizIdx = 0;
@@ -64,6 +71,11 @@ function updateQuizTimer() {
         } else {
             clearInterval(quizTimer);
             $("#timer").text("Time is up!");
+
+            // time out, give out answer in a funny way
+            $("#selectZone").html('<img src="assets/images/nay.gif" alt="yay" width="60%">');
+            $("#answerZone").show();
+            $("#answerZone").text(triviaQuiz[currQuizIdx].timeoutCaption);
 
             // move on to next quiz
             nextQuiz();
@@ -157,7 +169,7 @@ $(function () {
         "font-size": "25px"
     })
     $("#answerZone").css({
-        "font-size": "20px",
+        "font-size": "30px",
         "margin-top": "20px"
     })
 
