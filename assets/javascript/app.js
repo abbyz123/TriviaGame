@@ -105,11 +105,13 @@ function updateQuiz() {
             if (triviaQuiz[currQuizIdx].answer === answerId) {
                 // correct answer
                 console.log("correct answer");
+                $("#selectZone").html('<img src="assets/images/yay.gif" alt="yay" width="60%">');
                 $("#answerZone").text(triviaQuiz[currQuizIdx].correctCaption);
                 correctAnswer += 1;
             } else {
                 // Wrong answer
                 console.log("wrong answer");
+                $("#selectZone").html('<img src="assets/images/nay.gif" alt="yay" width="60%">');
                 $("#answerZone").text(triviaQuiz[currQuizIdx].wrongCaption);
             }
 
