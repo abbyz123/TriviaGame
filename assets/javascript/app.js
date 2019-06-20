@@ -6,6 +6,14 @@ let triviaQuiz = [{
     question: "who is your mummy?",
     choice: ["you are", "she is", "no one is"],
     answer: 0
+}, {
+    question: "who is your granpa?",
+    choice: ["you are", "he is", "no one is"],
+    answer: 2
+}, {
+    question: "who is your granma?",
+    choice: ["you are", "she is", "no one is"],
+    answer: 1
 }];
 
 let currQuizIdx = 0;
@@ -17,12 +25,32 @@ var answerTimer;
 
 let correctAnswer = 0;
 
+function updateQuizTimer() {
+    $("#timer").text("Time left: " + Math.ceil(thinkTimeMS / 1000) + " seconds");
+    let countDownTime = new Date().getTime() + thinkTimeMS;
+    quizTimer = setInterval(function() {
+        let now = new Date().getTime();
+        let distance = countDownTime - now;
+
+        if (distance >= 0) {
+            let seconds = Math.ceil(distance / 1000);
+            $("#timer").text("Time left: " + seconds + " seconds");
+        } else {
+            clearInterval(quizTimer);
+            $("#timer").text("Time is up!");
+
+            // move on to next quiz
+            nextQuiz();
+        }
+    }, 1000);
+}
+
 function updateQuiz() {
     // remove previous answer
     $("#answerZone").hide();
 
     // show question
-    $("#questionZone").append("<p id='currQuestion'>" + triviaQuiz[currQuizIdx].question + "</p>");
+    $("#questionZone").html("<p id='currQuestion'>" + triviaQuiz[currQuizIdx].question + "</p>");
 
     currChoice = "";
     for(i = 0; i < triviaQuiz[currQuizIdx].choice.length; i++) {
@@ -46,6 +74,7 @@ function updateQuiz() {
             let answerId = $(this).attr("id");
             answerId = parseInt(answerId);
 
+            // show answer
             $("#answerZone").show();
             if (triviaQuiz[currQuizIdx].answer === answerId) {
                 // correct answer
@@ -57,8 +86,30 @@ function updateQuiz() {
                 console.log("wrong answer");
                 $("#answerZone").text("Wrong Answer!");
             }
+
+            // next quiz
+            nextQuiz();           
         })
     });
+}
+
+function nextQuiz() {
+    currQuizIdx += 1;       // next quiz
+    if (currQuizIdx >= triviaQuiz.length) {
+        // end of quiz, show score
+    } else {
+        // down five seconds and move on to next quiz
+        let chillDownTime = new Date().getTime() + answerTimeMS;
+        answerTimer = setInterval(function() {
+            let now = new Date().getTime();
+            let distance = chillDownTime - now;
+            if (distance < 0) {
+                clearInterval(answerTimer);
+                updateQuiz();
+                updateQuizTimer();
+            }
+        }, 1000);
+    }
 }
 
 $(function () {
@@ -81,20 +132,6 @@ $(function () {
     $("#start").on("click", function (e) {
         console.log('start');
         updateQuiz()
-
-        $("#timer").text("Time left: " + Math.ceil(thinkTimeMS / 1000) + " seconds");
-        let countDownTime = new Date().getTime() + thinkTimeMS;
-        quizTimer = setInterval(function() {
-            let now = new Date().getTime();
-            let distance = countDownTime - now;
-
-            if (distance >= 0) {
-                let seconds = Math.ceil(distance / 1000);
-                $("#timer").text("Time left: " + seconds + " seconds");
-            } else {
-                clearInterval(quizTimer);
-                $("#timer").text("Time is up!");
-            }
-        }, 1000);
+        updateQuizTimer();
     })
 });
