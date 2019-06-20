@@ -73,7 +73,7 @@ function updateQuizTimer() {
             $("#timer").text("Time is up!");
 
             // time out, give out answer in a funny way
-            $("#selectZone").html('<img src="assets/images/nay.gif" alt="yay" width="60%">');
+            $("#selectZone").html('<img src="assets/images/nay.gif" alt="nay" width="50%">');
             $("#answerZone").show();
             $("#answerZone").text(triviaQuiz[currQuizIdx].timeoutCaption);
 
@@ -103,7 +103,8 @@ function updateQuiz() {
         })
         console.log($(this).find("a"));
         $(this).find("a").css({
-            "font-size": "40px"
+            "font-size": "40px",
+            "width" : "50%"
         });
 
         $(this).find("a").on("click", function () {
@@ -123,7 +124,7 @@ function updateQuiz() {
             } else {
                 // Wrong answer
                 console.log("wrong answer");
-                $("#selectZone").html('<img src="assets/images/nay.gif" alt="yay" width="60%">');
+                $("#selectZone").html('<img src="assets/images/nay.gif" alt="nay" width="50%">');
                 $("#answerZone").text(triviaQuiz[currQuizIdx].wrongCaption);
             }
 
