@@ -15,7 +15,12 @@ let answerTimeMS = 5000;
 var quizTimer;
 var answerTimer;
 
+let correctAnswer = 0;
+
 function updateQuiz() {
+    // remove previous answer
+    $("#answerZone").hide();
+
     // show question
     $("#questionZone").append("<p id='currQuestion'>" + triviaQuiz[currQuizIdx].question + "</p>");
 
@@ -39,13 +44,21 @@ function updateQuiz() {
             clearInterval(quizTimer);
 
             let answerId = $(this).attr("id");
-            $("#timer").text("A choice is chosen! " + answerId);
+            answerId = parseInt(answerId);
 
+            $("#answerZone").show();
+            if (triviaQuiz[currQuizIdx].answer === answerId) {
+                // correct answer
+                console.log("correct answer");
+                $("#answerZone").text("Correct Answer!");
+                correctAnswer += 1;
+            } else {
+                // Wrong answer
+                console.log("wrong answer");
+                $("#answerZone").text("Wrong Answer!");
+            }
         })
     });
-
-    // remove previous answer
-    $("#answerZone").remove();
 }
 
 $(function () {
@@ -56,6 +69,10 @@ $(function () {
     $("#questionZone").addClass("questionText");
     $("#timer").css({
         "font-size" : "25px"
+    })
+    $("#answerZone").css({
+        "font-size" : "20px",
+        "margin-top" : "20px"
     })
 
     // TODO: shuffle the sequence of the quiz questions
